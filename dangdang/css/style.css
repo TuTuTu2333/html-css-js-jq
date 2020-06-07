@@ -1,0 +1,77 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.box {
+    width: 1200px;
+    margin: 30px auto;
+}
+
+ul,
+li {
+    list-style: none;
+}
+
+.list {
+    width: 210px;
+    height: 360px;
+    float: left;
+    margin-right: 25px;
+    margin-top: 20px;
+    border: 1px solid #eee;
+    padding: 3px;
+    text-align: center;
+}
+
+.price {
+    height: 30px;
+    color: red;
+    text-align: left;
+    margin-top: 5px;
+    line-height: 30px;
+}
+
+.name {
+    font-size: 13px;
+    color: #999;
+    text-align: left;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    margin-top: 5px;
+}
+
+.hotWord {
+    font-size: 13px;
+    color: red;
+    text-align: left;
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    margin-top: 5px;
+}
+
+.shopName {
+    height: 20px;
+    line-height: 20px;
+    font-size: 14px;
+    text-align: left;
+    margin-top: 5px;
+}
+
+.activity {
+    font-size: 15px;
+    float: left;
+    color: red;
+    margin-top: 5px;
+}
+
+.collect {
+    font-size: 13px;
+    float: right;
+    margin-top: 7px;
+}

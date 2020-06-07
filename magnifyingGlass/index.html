@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="./js/jquery-3.4.1.js"></script>
+</head>
+
+<body>
+    <div class="con">
+        <div class="show-img">
+            <div class="img-mask"></div>
+        </div>
+        <div class="nav-img">
+            <span><img src="./img/01.jpg" alt=""></span>
+            <span><img src="./img/02.png" alt=""></span>
+            <span><img src="./img/03.jpg" alt=""></span>
+            <span><img src="./img/04.jpg" alt=""></span>
+            <span><img src="./img/05.jpg" alt=""></span>
+        </div>
+        <div class="max-img"></div>
+    </div>
+    <script>
+        class Manager {
+            constructor(data) {
+                this.data = data;
+                this.index = null;
+            }
+            init() {
+                this.renderUI();
+                this.evenClickHandler();
+                this.evenMouseHandler();
+            }
+            renderUI() {
+                let oImgA = this.data.map((item, index) => {
+                    return `<span class="spanImg ${index==0?"current":""}"><img src="${item}" alt=""></span>`
+                }).join("");
+
+                let oImgB = this.data.map((item, index) => {
+                    return `<span class="spanImg"><img src="${item}" alt=""></span>`
+                }).join("");
+
+                $(".show-img").append(oImgA);
+                $(".max-img").append(oImgB);
+            }
+            evenClickHandler() {
+                let self = this;
+                $(".nav-img").on("click", "span", function () {
+                    $(this).addClass("active").siblings().removeClass("active");
+                    self.index = $(this).index();
+                    $(".show-img .spanImg").eq(self.index).addClass("current").siblings().removeClass(
+                        "current");
+                    // if ($(".img-mask").css("display") == "block") {
+                    //     $(".max-img img").eq(self.index).css("display", "block").siblings().css(
+                    //         "display", "none");
+                    // }
+                })
+            }
+            evenMouseHandler() {
+                let self = this;
+                $(".show-img").on("mouseenter", ".spanImg", function () {
+                    self.index = $(this).index() - 1;
+                    console.log(self.index);
+
+                    let maxImg = $(`.max-img .spanImg:eq(${self.index})`);
+
+                    $(".img-mask").css("display", "block");
+                    maxImg.addClass("current").siblings().removeClass("current");
+                    $(".show-img").mousemove(function (e) {
+                        //得到遮罩物自身的宽和高
+                        let centerX = $(".img-mask").width();
+                        let centerY = $(".img-mask").height();
+
+                        //的到距离浏览器的距离
+                        let X = $(this).offset().left;
+                        let Y = $(this).offset().top;
+
+                        /* 得到遮罩物距左边盒子的距离 */
+                        let left = e.pageX - X - (centerX / 2);
+                        let top = e.pageY - Y - (centerY / 2);
+
+                        /* 遮罩物向x轴移动的最大距离 */
+                        let minPicX = $(this).width() - centerX;
+                        /* 遮罩物向Y轴移动的最大距离 */
+                        let minPicY = $(this).height() - centerY;
+
+                        /* 设置临界值 */
+                        if (left <= 0) {
+                            left = 0
+                        } else if (left > minPicX) { //向左运动的最大距离
+                            left = minPicX;
+                        }
+                        if (top <= 0) {
+                            top = 0;
+                        } else if (top >= minPicY) { //向下运动的最大距离
+                            top = minPicY;
+                        }
+
+                        $(".img-mask").css("left", left).css("top", top);
+                        /* 等比例缩放：遮罩物移动的距离/小盒子移动的巨大距离 = 显示区移动的距离/大盒子移动的最大距离 */
+                        /* 显示区移动的图片 = 遮罩物移动的距离/小盒子移动的巨大距离 *大盒子移动的最大距离  */
+
+                        /* 得到大图片移动的最大距离 */
+
+                        let maxPicX = maxImg.children("img").width() - maxImg.width();
+                        let maxPicY = maxImg.children("img").height() - maxImg.height();
+
+                        /* 得到显示区域的的移动的图片 */
+                        let leftImg = -left / minPicX * maxPicX;
+                        let topImg = -top / minPicY * maxPicY;
+                        console.log(leftImg, topImg);
+                        maxImg.children("img").css("left", leftImg).css("top", topImg);
+                    })
+                })
+
+                $(".show-img").mouseleave(() => {
+                    $(".img-mask").css("display", "none");
+                    $(".max-img span").addClass(".spanImg").removeClass("current");
+                })
+            }
+        }
+        // $.getJSON("./json/index.json", (data) => {
+        //     console.log(data);
+        // });
+        $.ajax({
+            type: "post",
+            url: "./php/index.php",
+            dataType: "json",
+            success: function (response) {
+                new Manager(response).init();
+            }
+        });
+    </script>
+</body>
+
+</html>

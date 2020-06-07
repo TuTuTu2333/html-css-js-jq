@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/jquery-3.4.1.js"></script>
+    <script src="./js/Manage.js"></script>
+</head>
+
+<body>
+    <script>
+        $.ajax({
+            type: "post",
+            url: "./php/slideshow.php",
+            dataType: "json",
+            success: function (response) {
+                new Manager(response).init();
+            }
+        });
+        //爬取数据
+        // var J_categoryList = document.querySelector("#J_categoryList");
+        // var titleList = J_categoryList.children;
+        // var arr1 = [];
+        // for (let index = 0; index < titleList.length; index++) {
+        //     var title = titleList[index].querySelector(".title").innerText;
+        //     arr1.push(title);
+        // }
+
+        // var J_categoryList = document.querySelector("#J_categoryList");
+        // var titleList = J_categoryList.children;
+        // var arr2 = [];
+        // Array.from(titleList).forEach(ele => {
+        //     var arr3 = [];
+        //     var children = ele.querySelector(".children");
+        //     var childrenList = children.children;
+        //     Array.from(childrenList).forEach(e => {
+        //         var arr4 = [];
+        //         var Li = e.children;
+        //         Array.from(Li).forEach(item => {
+        //             var obj = {};
+        //             obj.img = item.querySelector("img").src;
+        //             obj.text = item.querySelector(".text").innerText;
+        //             arr4.push(obj);
+        //         })
+
+        //         arr3.push(arr4);
+        //     })
+
+        //     arr2.push(arr3);
+        // })
+    </script>
+</body>
+
+</html>

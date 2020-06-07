@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/jquery-3.4.1.js"></script>
+    <script src="./js/Manage.js"></script>
+</head>
+
+<body>
+    <script>
+        $(() => {
+            // function getAjax(url) {
+            //     $.ajax({
+            //         type: "post",
+            //         url,
+            //         dataType: "json",
+            //         success: function (response) {
+            //             new Manager(response).init();
+            //         }
+            //     });
+            // }
+            // getAjax("./php/xiaomifloorA.php");
+            // getAjax("./php/xiaomifloorB.php");
+
+            //getJSON()方法使用 AJAX 的 HTTP GET 请求获取 JSON 数据。
+            //语法:$(selector).getJSON(url,data,success(data,status,xhr))
+            //第一个参数必需，剩下两个参数可选
+            //可直接访问json文件，可不必再使用php文件中间访问
+            $.getJSON("./json/dataA.json", (data) => {
+                new Manager(data).init();
+            })
+            $.getJSON("./json/dataB.json", (data) => {
+                new Manager(data).init();
+            })
+        })
+    </script>
+</body>
+
+</html>

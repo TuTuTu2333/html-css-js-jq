@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/slider.css">
+    <script src="./js/jquery-3.4.1.js"></script>
+    <script src="./js/slideshow.js"></script>
+</head>
+
+<body>
+    <script>
+        $.ajax({
+            type: "post",
+            url: "./php/slider.php",
+            dataType: "json",
+            success: function (response) {
+                console.log(response);
+                new Slider(response).init();
+            }
+        });
+        //爬取数据
+        // var content = document.querySelectorAll(".content");
+        // var arr = []
+        // for (var i = 0, len = content.length; i < len; i++) {
+        //     var obj = {};
+        //     obj.src = content[i].querySelector(".thumb img").src
+        //     obj.title = content[i].querySelector(".title").innerText
+        //     obj.desc = content[i].querySelector(".desc").innerText
+        //     obj.price = content[i].querySelector(".price span").innerText
+        //     obj.oldPrice = content[i].querySelector(".price del").innerText
+        //     arr.push(obj);
+        // }
+    </script>
+</body>
+
+</html>

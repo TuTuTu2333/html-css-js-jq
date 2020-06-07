@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/jquery-3.4.1.js"></script>
+    <script src="./js/Manage.js"></script>
+</head>
+
+<body>
+    <script>
+        $.ajax({
+            type: "post",
+            url: "./php/dangdang.php",
+            dataType: "json",
+            success: function (response) {
+                new Manager(response).init();
+            }
+        });
+
+        //爬取数据
+        // var ul = document.querySelector(".bigimg");
+        // var li = ul.children;
+
+        // var arr = [];
+        // for (var i = 1, len = li.length; i < len; i++) {
+        //     var obj = {};
+        //     var arr2 = [];
+        //     obj.src = li[i].querySelector(".pic img").src;
+        //     obj.price = li[i].querySelector(".price").innerText;
+        //     obj.name = li[i].querySelector(".name a").innerText;
+        //     obj.hotWord = li[i].querySelector(".search_hot_word") ? li[i].querySelector(".search_hot_word").innerText :
+        //         "";
+        //     obj.collect = li[i].querySelector(".star a").innerText;
+        //     obj.shopName = li[i].querySelector(".link a").innerText;
+        //     obj.activity = li[i].querySelector(".new_lable") ? li[i].querySelector(".new_lable").innerText : "";
+
+        //     arr.push(obj);
+        // }
+    </script>
+</body>
+
+</html>
